@@ -74,7 +74,16 @@ where the time largely depends on the performance of the CPU. For a 2.4 GHz Inte
 <img src="https://github.com/cwhsing/gnn_thermal/blob/main/simulation_data/example_1/step_800.png?raw=true" width=50% height=50%>
 
 ### Example 2
-The second expample shows how to 
+The second expample shows how to make an animation of the diffusion process by saving the plots for all time steps and combining them. Simply run:
+```
+python simulation_data/example_2/mesh2D_all-steps.py
+```
+and you will get 801 figures. To create an GIF animation with each figure as a frame, run:
+```
+python simulation_data/example_2/create_gif.py
+```
+Setting duration=20 gives you an FPS of 50, which is the maximally supported value in most viewers and browsers.
+
 ## Binary Data (class 5 & 7)
 - Data: **dataset/fdata_57.npy**  
 shape of fdata_57.npy: (14000, 28, 28)  
