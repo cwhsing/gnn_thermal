@@ -16,6 +16,7 @@ pip install torch-sparse
 ```
 where the last two packages, while optional, are stronly reconmmended as they are commonly used together with PyG. For more details please refer to:
 https://pytorch-geometric.readthedocs.io/en/latest/
+
 ## Simulation with FiPy (FEM)
 To make later GNN implementation more manageable, we study a simpler heat diffusion case in which a 1(cm)x1(cm) patch with fixed temperature of 350K is placed on a 3(cm)x4(cm) board with initial temperature of 300K, thermal diffusivity of 1.0, and zero-flux Neumann boundary condition. The mesh is a 30x40 regular grid consisting of 1200 0.1(cm)x0.1(cm) cells:
 ```
@@ -37,8 +38,38 @@ patch_condition = (x > 1.5) & (x < 2.5) & (y > 1.5) & (y < 2.5)
 # Apply fixed temperature to the internal patch (e.g., 500K)
 T.constrain(350.0, where=patch_condition)
 ```
-The explicit solver is subject to 
+We then set up the diffusion equation and adopt the explicit solver:
+```
+alpha = 1.0  # Thermal diffusivity
+eq = TransientTerm() == ExplicitDiffusionTerm(coeff=alpha)
+```
+Since explicit solver is subject to the CFL condition, the largest stable time step is 0.0025 second. We found no significant difference when gradually decreasing the time step and therefore adopt the largest value. To make later GNN implementation more manageable, we simulate only for 800 steps, i.e. the first 2 seconds of the heat diffusion process. This can be done by:
+```
+# Time-stepping loop
+# CFL condition: timeStepDuration <= 1.0 * dx**2 / (4 * alpha)
+timeStepDuration = 0.0025
+steps = 800 + 1
+for step in range(steps):
+    if step > 0:
+        eq.solve(var=T, dt=timeStepDuration)
+```
+Implicit solver, on the other hand, is not subject to the CFL condition, but the accuracy with the same time step is worse than that of explicit solver. In principle, implicit solver is harder to code, but in FiPy this can easily be done by setting the equation as:
+```
+eq = TransientTerm() == DiffusionTerm(coeff=alpha)
+```
+In this project, however, we stick to explicit solver for generating high quality data.
 
+### Example 1
+Here we show an example in which the plot is shown and saved only after solving for all steps. Using the command:
+```
+python -i simulation_data/example_1/mesh2D_step-800.py
+```
+should show the final plot and give the following lines:
+```
+FEM simulation CPU time: 5.33 seconds
+>>>
+```
+where the time largely depends on the performance of the CPU. For a 2.4 GHz Intel Core i9, the typcial range is 5.0 ~ 5.5 seconds. The interactive mode allows you to inspect the details of the variables, such as the values of the temperature field.
 ![Image 1](https://raw.githubusercontent.com/lmcinnes/umap/master/images/umap_example_fashion_mnist1.png)
 
 ## Binary Data (class 5 & 7)
