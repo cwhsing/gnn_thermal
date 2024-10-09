@@ -135,3 +135,127 @@ python simulation_data/test_data/generate_test_data.py
 ```
 The test dataset contains one test data with the patch located at ```(1.0, 1.0)```, which is an unseen condition.
 
+## Training the GNN model
+With the ```train_and_eval()``` function on, run:
+```
+python gns.py
+```
+or if on a server:
+```
+nohup python -u gns.py > log
+```
+The result of the first 100 epochs is:
+```
+Epoch 001/100, MSE_Loss_train: 0.454998, MAE_train: 0.6385, MAE_test: 0.4846
+Epoch 002/100, MSE_Loss_train: 0.272070, MAE_train: 0.4739, MAE_test: 0.3270
+Epoch 003/100, MSE_Loss_train: 0.147620, MAE_train: 0.3190, MAE_test: 0.1863
+Epoch 004/100, MSE_Loss_train: 0.078994, MAE_train: 0.1848, MAE_test: 0.0737
+Epoch 005/100, MSE_Loss_train: 0.050006, MAE_train: 0.0827, MAE_test: 0.0438
+Epoch 006/100, MSE_Loss_train: 0.043883, MAE_train: 0.0394, MAE_test: 0.0970
+Epoch 007/100, MSE_Loss_train: 0.047225, MAE_train: 0.0778, MAE_test: 0.1268
+Epoch 008/100, MSE_Loss_train: 0.049543, MAE_train: 0.0958, MAE_test: 0.1300
+Epoch 009/100, MSE_Loss_train: 0.048909, MAE_train: 0.0914, MAE_test: 0.1155
+Epoch 010/100, MSE_Loss_train: 0.046538, MAE_train: 0.0736, MAE_test: 0.0931
+Epoch 011/100, MSE_Loss_train: 0.044590, MAE_train: 0.0509, MAE_test: 0.0702
+Epoch 012/100, MSE_Loss_train: 0.043653, MAE_train: 0.0320, MAE_test: 0.0540
+Epoch 013/100, MSE_Loss_train: 0.043614, MAE_train: 0.0316, MAE_test: 0.0468
+Epoch 014/100, MSE_Loss_train: 0.043794, MAE_train: 0.0359, MAE_test: 0.0450
+Epoch 015/100, MSE_Loss_train: 0.043826, MAE_train: 0.0363, MAE_test: 0.0468
+Epoch 016/100, MSE_Loss_train: 0.043703, MAE_train: 0.0339, MAE_test: 0.0497
+Epoch 017/100, MSE_Loss_train: 0.043626, MAE_train: 0.0312, MAE_test: 0.0538
+Epoch 018/100, MSE_Loss_train: 0.043588, MAE_train: 0.0286, MAE_test: 0.0572
+Epoch 019/100, MSE_Loss_train: 0.043584, MAE_train: 0.0274, MAE_test: 0.0583
+Epoch 020/100, MSE_Loss_train: 0.043600, MAE_train: 0.0283, MAE_test: 0.0592
+Epoch 021/100, MSE_Loss_train: 0.043597, MAE_train: 0.0283, MAE_test: 0.0579
+Epoch 022/100, MSE_Loss_train: 0.043590, MAE_train: 0.0276, MAE_test: 0.0561
+Epoch 023/100, MSE_Loss_train: 0.043583, MAE_train: 0.0281, MAE_test: 0.0553
+Epoch 024/100, MSE_Loss_train: 0.043585, MAE_train: 0.0285, MAE_test: 0.0543
+Epoch 025/100, MSE_Loss_train: 0.043583, MAE_train: 0.0285, MAE_test: 0.0552
+Epoch 026/100, MSE_Loss_train: 0.043586, MAE_train: 0.0280, MAE_test: 0.0560
+Epoch 027/100, MSE_Loss_train: 0.043580, MAE_train: 0.0280, MAE_test: 0.0549
+Epoch 028/100, MSE_Loss_train: 0.043577, MAE_train: 0.0283, MAE_test: 0.0543
+Epoch 029/100, MSE_Loss_train: 0.043572, MAE_train: 0.0283, MAE_test: 0.0545
+Epoch 030/100, MSE_Loss_train: 0.043573, MAE_train: 0.0279, MAE_test: 0.0554
+Epoch 031/100, MSE_Loss_train: 0.043573, MAE_train: 0.0275, MAE_test: 0.0559
+Epoch 032/100, MSE_Loss_train: 0.043578, MAE_train: 0.0277, MAE_test: 0.0547
+Epoch 033/100, MSE_Loss_train: 0.043567, MAE_train: 0.0278, MAE_test: 0.0548
+Epoch 034/100, MSE_Loss_train: 0.043568, MAE_train: 0.0276, MAE_test: 0.0551
+Epoch 035/100, MSE_Loss_train: 0.043569, MAE_train: 0.0276, MAE_test: 0.0545
+Epoch 036/100, MSE_Loss_train: 0.043567, MAE_train: 0.0277, MAE_test: 0.0542
+Epoch 037/100, MSE_Loss_train: 0.043567, MAE_train: 0.0276, MAE_test: 0.0549
+Epoch 038/100, MSE_Loss_train: 0.043565, MAE_train: 0.0276, MAE_test: 0.0539
+Epoch 039/100, MSE_Loss_train: 0.043559, MAE_train: 0.0277, MAE_test: 0.0541
+Epoch 040/100, MSE_Loss_train: 0.043561, MAE_train: 0.0277, MAE_test: 0.0537
+Epoch 041/100, MSE_Loss_train: 0.043562, MAE_train: 0.0275, MAE_test: 0.0547
+Epoch 042/100, MSE_Loss_train: 0.043562, MAE_train: 0.0270, MAE_test: 0.0551
+Epoch 043/100, MSE_Loss_train: 0.043554, MAE_train: 0.0270, MAE_test: 0.0543
+Epoch 044/100, MSE_Loss_train: 0.043553, MAE_train: 0.0272, MAE_test: 0.0536
+Epoch 045/100, MSE_Loss_train: 0.043555, MAE_train: 0.0275, MAE_test: 0.0531
+Epoch 046/100, MSE_Loss_train: 0.043552, MAE_train: 0.0276, MAE_test: 0.0532
+Epoch 047/100, MSE_Loss_train: 0.043562, MAE_train: 0.0274, MAE_test: 0.0542
+Epoch 048/100, MSE_Loss_train: 0.043550, MAE_train: 0.0269, MAE_test: 0.0542
+Epoch 049/100, MSE_Loss_train: 0.043555, MAE_train: 0.0269, MAE_test: 0.0539
+Epoch 050/100, MSE_Loss_train: 0.043547, MAE_train: 0.0272, MAE_test: 0.0528
+Epoch 051/100, MSE_Loss_train: 0.043546, MAE_train: 0.0274, MAE_test: 0.0526
+Epoch 052/100, MSE_Loss_train: 0.043549, MAE_train: 0.0273, MAE_test: 0.0533
+Epoch 053/100, MSE_Loss_train: 0.043551, MAE_train: 0.0273, MAE_test: 0.0525
+Epoch 054/100, MSE_Loss_train: 0.043543, MAE_train: 0.0273, MAE_test: 0.0529
+Epoch 055/100, MSE_Loss_train: 0.043547, MAE_train: 0.0271, MAE_test: 0.0528
+Epoch 056/100, MSE_Loss_train: 0.043542, MAE_train: 0.0268, MAE_test: 0.0539
+Epoch 057/100, MSE_Loss_train: 0.043543, MAE_train: 0.0268, MAE_test: 0.0545
+Epoch 058/100, MSE_Loss_train: 0.043540, MAE_train: 0.0267, MAE_test: 0.0534
+Epoch 059/100, MSE_Loss_train: 0.043537, MAE_train: 0.0265, MAE_test: 0.0530
+Epoch 060/100, MSE_Loss_train: 0.043538, MAE_train: 0.0269, MAE_test: 0.0520
+Epoch 061/100, MSE_Loss_train: 0.043540, MAE_train: 0.0269, MAE_test: 0.0523
+Epoch 062/100, MSE_Loss_train: 0.043539, MAE_train: 0.0270, MAE_test: 0.0522
+Epoch 063/100, MSE_Loss_train: 0.043543, MAE_train: 0.0272, MAE_test: 0.0515
+Epoch 064/100, MSE_Loss_train: 0.043532, MAE_train: 0.0269, MAE_test: 0.0528
+Epoch 065/100, MSE_Loss_train: 0.043538, MAE_train: 0.0267, MAE_test: 0.0536
+Epoch 066/100, MSE_Loss_train: 0.043541, MAE_train: 0.0266, MAE_test: 0.0522
+Epoch 067/100, MSE_Loss_train: 0.043531, MAE_train: 0.0265, MAE_test: 0.0523
+Epoch 068/100, MSE_Loss_train: 0.043529, MAE_train: 0.0264, MAE_test: 0.0526
+Epoch 069/100, MSE_Loss_train: 0.043531, MAE_train: 0.0263, MAE_test: 0.0522
+Epoch 070/100, MSE_Loss_train: 0.043527, MAE_train: 0.0263, MAE_test: 0.0524
+Epoch 071/100, MSE_Loss_train: 0.043542, MAE_train: 0.0267, MAE_test: 0.0510
+Epoch 072/100, MSE_Loss_train: 0.043525, MAE_train: 0.0265, MAE_test: 0.0518
+Epoch 073/100, MSE_Loss_train: 0.043523, MAE_train: 0.0262, MAE_test: 0.0524
+Epoch 074/100, MSE_Loss_train: 0.043526, MAE_train: 0.0267, MAE_test: 0.0530
+Epoch 075/100, MSE_Loss_train: 0.043526, MAE_train: 0.0268, MAE_test: 0.0523
+Epoch 076/100, MSE_Loss_train: 0.043530, MAE_train: 0.0264, MAE_test: 0.0508
+Epoch 077/100, MSE_Loss_train: 0.043528, MAE_train: 0.0268, MAE_test: 0.0505
+Epoch 078/100, MSE_Loss_train: 0.043523, MAE_train: 0.0267, MAE_test: 0.0513
+Epoch 079/100, MSE_Loss_train: 0.043516, MAE_train: 0.0261, MAE_test: 0.0524
+Epoch 080/100, MSE_Loss_train: 0.043521, MAE_train: 0.0270, MAE_test: 0.0529
+Epoch 081/100, MSE_Loss_train: 0.043531, MAE_train: 0.0266, MAE_test: 0.0510
+Epoch 082/100, MSE_Loss_train: 0.043532, MAE_train: 0.0266, MAE_test: 0.0526
+Epoch 083/100, MSE_Loss_train: 0.043520, MAE_train: 0.0271, MAE_test: 0.0525
+Epoch 084/100, MSE_Loss_train: 0.043515, MAE_train: 0.0266, MAE_test: 0.0516
+Epoch 085/100, MSE_Loss_train: 0.043517, MAE_train: 0.0263, MAE_test: 0.0497
+Epoch 086/100, MSE_Loss_train: 0.043521, MAE_train: 0.0265, MAE_test: 0.0505
+Epoch 087/100, MSE_Loss_train: 0.043515, MAE_train: 0.0262, MAE_test: 0.0503
+Epoch 088/100, MSE_Loss_train: 0.043517, MAE_train: 0.0261, MAE_test: 0.0513
+Epoch 089/100, MSE_Loss_train: 0.043512, MAE_train: 0.0259, MAE_test: 0.0511
+Epoch 090/100, MSE_Loss_train: 0.043515, MAE_train: 0.0263, MAE_test: 0.0517
+Epoch 091/100, MSE_Loss_train: 0.043518, MAE_train: 0.0264, MAE_test: 0.0509
+Epoch 092/100, MSE_Loss_train: 0.043533, MAE_train: 0.0266, MAE_test: 0.0526
+Epoch 093/100, MSE_Loss_train: 0.043545, MAE_train: 0.0267, MAE_test: 0.0491
+Epoch 094/100, MSE_Loss_train: 0.043516, MAE_train: 0.0263, MAE_test: 0.0506
+Epoch 095/100, MSE_Loss_train: 0.043524, MAE_train: 0.0268, MAE_test: 0.0525
+Epoch 096/100, MSE_Loss_train: 0.043514, MAE_train: 0.0264, MAE_test: 0.0504
+Epoch 097/100, MSE_Loss_train: 0.043509, MAE_train: 0.0259, MAE_test: 0.0500
+Epoch 098/100, MSE_Loss_train: 0.043507, MAE_train: 0.0260, MAE_test: 0.0499
+Epoch 099/100, MSE_Loss_train: 0.043509, MAE_train: 0.0262, MAE_test: 0.0515
+Epoch 100/100, MSE_Loss_train: 0.043507, MAE_train: 0.0262, MAE_test: 0.0507
+```
+where we can see that the model converges within ~20 epochs and the best model (corresponding to the lowest MAE_test) is saved with:
+```
+torch.save(model.state_dict(), 'gns_model.pth')
+```
+On a Nvidia RTX 4090 GPU, each epoch takes ~12 seconds.
+
+## Simulate with the Saved Model and Test Data
+With the ```simulator()``` function on, run:
+```
+python gns.py
+```
+You will get 801 plots which can be combined into a GIF animation.
