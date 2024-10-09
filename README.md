@@ -86,6 +86,25 @@ Setting duration=20 gives you an FPS of 50, which is the maximally supported val
 
 <img src="https://github.com/cwhsing/gnn_thermal/blob/main/simulation_data/example_2/data_19.gif?raw=true" width=50% height=50%>
 
+## Data Generation
+FiPy codes can readily be incorporated with PyG for generating time-series graphs. Note that in creating dataset files, HDF5 format should always be used as it can handle graph data much more effieciently. In particular, the size of the resulting dataset will be significantly smaller and loading the data to GPU will not incur memory overhead.
+
+The training dataset includes 25 data, each with different patch location. To ensure maximal spatial diversity and avoid duplication due to symmetry, we manually crafted the patch locations as follows:
+```
+# Define the patch locations (as tuples of (x, y) coordinates of the lower-left corners)
+patch_locations = [(0.1, 0.1), (0.1, 1.3), (0.1, 2.0), (0.3, 1.1), (0.3, 2.2),
+                   (0.5, 0.9), (0.5, 2.4), (0.7, 0.4), (0.7, 1.7), (0.7, 2.9),
+                   (0.9, 0.2), (0.9, 1.4), (0.9, 1.9), (1.1, 0.5), (1.1, 2.2),
+                   (1.3, 0.7), (1.3, 2.0), (1.5, 1.2), (1.5, 1.5), (1.5, 2.7),
+                   (1.7, 0.2), (1.7, 1.4), (1.7, 2.5), (1.9, 0.4), (1.9, 2.3)]
+```
+The initial and boundary conditions are always the same:
+```
+# Initialize temperature field
+T_initial = 300.0  # Initial temperature of the entire board
+T_patch = 350.0    # Fixed temperature for the patch
+T = CellVariable(mesh=mesh, value=T_initial)
+``` 
 ## Binary Data (class 5 & 7)
 - Data: **dataset/fdata_57.npy**  
 shape of fdata_57.npy: (14000, 28, 28)  
