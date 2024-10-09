@@ -69,9 +69,12 @@ should show the final plot and give the following lines:
 FEM simulation CPU time: 5.33 seconds
 >>>
 ```
-where the time largely depends on the performance of the CPU. For a 2.4 GHz Intel Core i9, the typcial range is 5.0 ~ 5.5 seconds. The interactive mode allows you to inspect the details of the variables, such as the values of the temperature field.
-![Image 1](https://raw.githubusercontent.com/lmcinnes/umap/master/images/umap_example_fashion_mnist1.png)
+where the time largely depends on the performance of the CPU. For a 2.4 GHz Intel Core i9, the typcial range is 5.0 ~ 5.5 seconds. The interactive mode allows you to inspect the details of the variables, such as the values of the temperature field. The saved plot should look like
 
+<img src="https://github.com/cwhsing/gnn_thermal/blob/main/simulation_data/example_1/step_800.png?raw=true" width=50% height=50%>
+
+### Example 2
+The second expample shows how to 
 ## Binary Data (class 5 & 7)
 - Data: **dataset/fdata_57.npy**  
 shape of fdata_57.npy: (14000, 28, 28)  
