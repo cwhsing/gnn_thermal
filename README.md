@@ -135,12 +135,14 @@ python simulation_data/test_data/generate_test_data.py
 ```
 The test dataset contains one test data with the patch located at ```(1.0, 1.0)```, which is an unseen condition.
 
-## Training the GNN model
-With the ```train_and_eval()``` function on, run:
+## The Architechture of the GNN Model 
+
+## Training the GNN Model
+Make sure you have the ```gnn_training_data.h5``` created and copied to the same directory having ```gns.py```. With the ```train_and_eval()``` function on, run:
 ```
 python gns.py
 ```
-or if on a server:
+or if on a server, run:
 ```
 nohup python -u gns.py > log
 ```
@@ -253,9 +255,16 @@ torch.save(model.state_dict(), 'gns_model.pth')
 ```
 On a Nvidia RTX 4090 GPU, each epoch takes ~12 seconds.
 
+We have several key findings:
+- The fact that MAE_train is smaller than 0.03K and MAE_train is around 0.05K inidicates that decent accuracies can be achieved with the current model.
+- The fact that MAE_test is only slightly above MAE_train indicates that the current model generalizes well.
+- The fact that MAE_test does not increase over many training epochs indicates that there is no overfitting. 
+
 ## Simulate with the Saved Model and Test Data
-With the ```simulator()``` function on, run:
+Make sure you have the ```gns_model.pth``` saved and copied to the same directory having ```gns.py```. With the ```simulator()``` function on, run:
 ```
 python gns.py
 ```
-You will get 801 plots which can be combined into a GIF animation.
+You will get 801 plots which can be combined into a GIF animation. The result should look like the file ```data_test.gif``` as shown below:
+
+<img src="https://github.com/cwhsing/gnn_thermal/blob/main/data_test.gif?raw=true" width=50% height=50%>
