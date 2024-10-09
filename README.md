@@ -104,7 +104,27 @@ The initial and boundary conditions are always the same:
 T_initial = 300.0  # Initial temperature of the entire board
 T_patch = 350.0    # Fixed temperature for the patch
 T = CellVariable(mesh=mesh, value=T_initial)
-``` 
+```
+In our data graphs, the edges have no input feature and the indices are the same for all data. The nodes, on the other hand, are mesh centers with the corresponing temperature as the feature, which can be created by:
+```
+# Loop through patch locations and save temperature data for each
+for patch_idx, (patch_x, patch_y) in enumerate(patch_locations):
+    T.setValue(T_initial)  # Reset temperature field to initial value
+
+    # Apply fixed temperature patch
+    apply_patch(T, patch_x, patch_y, mesh)
+
+    # Create a group for this patch in the HDF5 file
+    patch_group = h5f.create_group(f'patch_{patch_idx}')
+    temp_dset = patch_group.create_dataset('x', shape=(steps, nx * ny), dtype='float32')
+
+    # Time-stepping loop for heat diffusion simulation
+    for step in range(steps):
+        if step > 0:
+            eq.solve(var=T, dt=timeStepDuration)
+        temp_dset[step, :] = T.value.copy()  # Store node features (temperature data)
+```
+
 ## Binary Data (class 5 & 7)
 - Data: **dataset/fdata_57.npy**  
 shape of fdata_57.npy: (14000, 28, 28)  
