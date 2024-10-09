@@ -82,7 +82,9 @@ and you will get 801 figures. To create an GIF animation with each figure as a f
 ```
 python simulation_data/example_2/create_gif.py
 ```
-Setting duration=20 gives you an FPS of 50, which is the maximally supported value in most viewers and browsers.
+Setting duration=20 gives you an FPS of 50, which is the maximally supported value in most viewers and browsers. The resulting GIF should look like
+
+<img src="https://github.com/cwhsing/gnn_thermal/blob/main/simulation_data/example_2/data_19.gif?raw=true" width=50% height=50%>
 
 ## Binary Data (class 5 & 7)
 - Data: **dataset/fdata_57.npy**  
