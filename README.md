@@ -16,8 +16,28 @@ pip install torch-sparse
 ```
 where the last two packages, while optional, are stronly reconmmended as they are commonly used together with PyG. For more details please refer to:
 https://pytorch-geometric.readthedocs.io/en/latest/
-## Dataset
+## Simulation with FiPy (FEM)
+To make later GNN implementation more manageable, we study a simpler heat diffusion case in which a 1(cm)x1(cm) patch with fixed temperature of 350K is placed on a 3(cm)x4(cm) board with initial temperature of 300K, thermal diffusivity of 1.0, and zero-flux Neumann boundary condition. The mesh is a 30x40 regular grid consisting of 1200 0.1(cm)x0.1(cm) cells:
+```
+# Create a 2D grid
+nx, ny = 30, 40
+dx, dy = 0.1, 0.1
+mesh = Grid2D(nx=nx, ny=ny, dx=dx, dy=dy)
+```
+The temperature field is initialized by:
+```
+T = CellVariable(mesh=mesh, value=300.0)  # Initial temperature of 300K
+```
+and the patch properties are set by:
+```
+# Define the coordinates of the internal patch (e.g., a small square region)
+x, y = mesh.cellCenters
+patch_condition = (x > 1.5) & (x < 2.5) & (y > 1.5) & (y < 2.5)
 
+# Apply fixed temperature to the internal patch (e.g., 500K)
+T.constrain(350.0, where=patch_condition)
+```
+The explicit solver is subject to 
 
 ![Image 1](https://raw.githubusercontent.com/lmcinnes/umap/master/images/umap_example_fashion_mnist1.png)
 
