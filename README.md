@@ -124,75 +124,14 @@ for patch_idx, (patch_x, patch_y) in enumerate(patch_locations):
             eq.solve(var=T, dt=timeStepDuration)
         temp_dset[step, :] = T.value.copy()  # Store node features (temperature data)
 ```
-
-## Binary Data (class 5 & 7)
-- Data: **dataset/fdata_57.npy**  
-shape of fdata_57.npy: (14000, 28, 28)  
-
-- Label: **dataset/flabel_57.npy**  
-shape of flabel_57.npy: (14000)  
-*notice: the labels are changed to **0 & 1** instead of the original 5 & 7*  
-
-**Code example of loading the data into torch tensor:**
+To generate the training dataset, simply run:
 ```
-import numpy as np
-import torch
-
-x, y = np.load('fdata_57.npy'), np.load('flabel_57.npy')
-
-x_train, x_test = torch.tensor(x[:12000])/255, torch.tensor(x[12000:])/255
-y_train, y_test = torch.tensor(y[:12000])/255, torch.tensor(y[12000:])/255
+python simulation_data/training_data/generate_training_data.py
 ```
-
-**Both data and label are placed in the order of class 0 & 1.**  
+and you will get ```gnn_training_data.h5```
+Similarly, you can get the test dataset ```gnn_test_data.h5``` with:
 ```
-x_train[:6000]: class 0, x_train[6000:]: class 1
-y_train[:6000]: class 0, y_train[6000:]: class 1
-
-x_test[:1000]: class 0, x_test[1000:]: class 1
-y_test[:1000]: class 0, y_test[1000:]: class 1
+python simulation_data/test_data/generate_test_data.py
 ```
-   
-## Ternary Data (class 5 & 7 & 9)
-- Data: **dataset/fdata_579.npy**  
-shape of fdata_579.npy: (21000, 28, 28)  
+The test dataset contains one test data with the patch located at ```(1.0, 1.0)```, which is an unseen condition.
 
-- Label: **dataset/flabel_579.npy**  
-shape of flabel_579.npy: (21000)  
-*notice: the labels are changed to **0 & 1 & 2** instead of the original 5 & 7 & 9*  
-
-**Code example of loading the data into torch tensor:**
-```
-import numpy as np
-import torch
-
-x, y = np.load('fdata_579.npy'), np.load('flabel_579.npy')
-
-x_train, x_test = torch.tensor(x[:18000])/255, torch.tensor(x[18000:])/255
-y_train, y_test = torch.tensor(y[:18000])/255, torch.tensor(y[18000:])/255
-```
-
-**Both data and label are placed in the order of class 0 & 1 & 2**  
-```
-x_train[:6000]: class 0, x_train[6000:12000]: class 1, x_train[12000:18000]: class 2
-y_train[:6000]: class 0, y_train[6000:12000]: class 1, y_train[12000:18000]: class 2
-
-x_test[:1000]: class 0, x_test[1000:2000]: class 1, x_test[2000:3000]: class 2
-y_test[:1000]: class 0, y_test[1000:2000]: class 1, y_test[2000:3000]: class 2
-```
-
-- You can customize another binary dataset comprising only class 7 & 9 or class 5 & 9 from this ternary one.  
-- Judging from the UMAP above, I assume that class 5 & 7 will make the problem complex enough.
-
-## Notice
-***Since the data are placed in order, you have to shuffle them first before training.***
-
-## Binary Classification (TTN-MPS, N=49, chi=2)
-**parameter count = 686**
-
-![Image 2](https://raw.githubusercontent.com/cwhsing/MPS-FashionMNIST/master/plot/fmnist57_chi2.png)
-
-## Ternary Classification (TTN-MPS, N=49, chi=2)
-**parameterr count = 686**
-
-![Image 3](https://raw.githubusercontent.com/cwhsing/MPS-FashionMNIST/master/plot/fmnist579_chi2.png)
