@@ -138,7 +138,7 @@ The test dataset contains one test data with the patch located at ```(1.0, 1.0)`
 ## The Architechture of the GNN Model 
 
 ## Training the GNN Model
-Make sure you have the ```gnn_training_data.h5``` created and copied to the same directory having ```gns.py```. With the ```train_and_eval()``` function on, run:
+Make sure you have the dataset ```gnn_training_data.h5``` created and copied to the same directory hosting ```gns.py```. With the ```train_and_eval()``` function on, run:
 ```
 python gns.py
 ```
@@ -260,11 +260,11 @@ We have several key findings:
 - The fact that MAE_test is only slightly above MAE_train indicates that the current model generalizes well.
 - The fact that MAE_test does not increase over many training epochs indicates that there is no overfitting. 
 
-## Simulate with the Saved Model and Test Data
-Make sure you have the ```gns_model.pth``` and ```gnn_test_data.h5``` saved and copied to the same directory having ```gns.py```. With the ```simulator()``` function on, run:
+## Simulation with the Saved Model and Test Data
+Make sure you have the best model ```gns_model.pth``` and test data ```gnn_test_data.h5``` saved and copied to the same directory hosting ```gns.py```. With the ```simulator()``` function on, run:
 ```
 python gns.py
 ```
 You will get 801 plots which can be combined into a GIF animation. The result should look like the file ```data_test.gif``` as shown below:
 
-<img src="https://github.com/cwhsing/gnn_thermal/blob/main/data_test.gif?raw=true" width=60% height=60%>
+<img src="https://github.com/cwhsing/gnn_thermal/blob/main/data_test.gif?raw=true" width=80% height=80%>
