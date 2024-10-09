@@ -261,10 +261,10 @@ We have several key findings:
 - The fact that MAE_test does not increase over many training epochs indicates that there is no overfitting. 
 
 ## Simulate with the Saved Model and Test Data
-Make sure you have the ```gns_model.pth``` saved and copied to the same directory having ```gns.py```. With the ```simulator()``` function on, run:
+Make sure you have the ```gns_model.pth``` and ```gnn_test_data.h5``` saved and copied to the same directory having ```gns.py```. With the ```simulator()``` function on, run:
 ```
 python gns.py
 ```
 You will get 801 plots which can be combined into a GIF animation. The result should look like the file ```data_test.gif``` as shown below:
 
-<img src="https://github.com/cwhsing/gnn_thermal/blob/main/data_test.gif?raw=true" width=50% height=50%>
+<img src="https://github.com/cwhsing/gnn_thermal/blob/main/data_test.gif?raw=true" width=60% height=60%>
