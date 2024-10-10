@@ -15,7 +15,6 @@ torch.cuda.set_device(gpu_id)
 torch.cuda.empty_cache()
 device = torch.device(f'cuda:{gpu_id}' if torch.cuda.is_available() else 'cpu')
 
-# torch.set_default_dtype(torch.float32)
 torch.manual_seed(0)
 
 bs, lr, epochs = 5, 1e-6, 100
@@ -265,9 +264,6 @@ def simulator():
     # Initialize the dataset from the HDF5 file
     test_dataset = HDF5GraphDataset('gnn_test_data.h5')
     test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
-
-    # Initialize a figure for plotting
-    plt.ion()  # Interactive mode on for live updates during simulation
 
     with torch.no_grad():
         for data in test_loader:
